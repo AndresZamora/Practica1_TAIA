@@ -1,0 +1,82 @@
+﻿ _______________________________________________________________________________________
+|-----------------------------| ESCENARIO BATALLA POKEMON |-----------------------------|
+|---------------------------------------------------------------------------------------|
+|									PASOS DE EJECUCION									|
+|---------------------------------------------------------------------------------------|
+|                                  Para ejecutar el archivo:                            |
+|				1.- Activar Eclipse.													|
+|				2.-	Crear proyecto.														|
+|				3.- Crear package agentes.												|
+|				4.- Importar: PikachuAgent, JigglypuffAgent y Entrenador1.				|
+|				5.- Crear interfaz del ejecutable.										|
+|				6.- Main Class: jade.Boot.												|
+|				7.- Argumentos:															|
+|					-gui Ash:agentes.Entrenador1;Pikachu:agentes.PikachuAgent;			|
+|					Jigglypuff:agentes.JigglypuffAgent									|
+|				8.- Ejecutar: Run														|
+|																						|
+|	* Se podria necesitar el jade.jar, lo adjunto por si lo necesita para ejecutar.		|
+|---------------------------------------------------------------------------------------|
+|                                       AGENTES                                         |
+|---------------------------------------------------------------------------------------|
+|                                   1.- Entrenador1.                                    |
+|                                   2.- PikachuAgent.									|
+|                                   3.- JigglypuffAgent.                                |
+|_______________________________________________________________________________________|
+|---------------------------------------------------------------------------------------|
+|                                       COMPORTAMIENTOS                                 |
+|---------------------------------------------------------------------------------------|
+|	NombreComportamiento	    |   TipoComportamiento  |           ClaseAgente         |
+|                               |                       |                               |
+|1.- ElegirPikachu		        |   SimpleBehaviour		|           Entrenador1         |
+|2.- DarAnimos			        |   CyclicBehaviour 	|           Entrenador1         |
+|3.- comportamientos		    |   SequentialBehaviour	|	        Entrenador1         |
+|4.- ComunicacionConEntrenador	|   SimpleBehaviour 	|           PikachuAgent        |
+|5.- Batalla2                   |   SimpleBehaviour 	|           PikachuAgent        |
+|6.- Dormido                    |   TickerBehaviour 	|           PikachuAgent        |
+|7.- Despierta                  |   WakerBehaviour	 	|           PikachuAgent        |
+|8.- Batalla3                   |   SimpleBehaviour 	|           JigglypuffAgent     |
+|9.- DormidoStepBehaviour       |   Behaviour           |           JigglypuffAgent     |
+|_______________________________________________________________________________________|
+|---------------------------------------------------------------------------------------|
+|                                       COMUNICACION                                    |
+|---------------------------------------------------------------------------------------|
+|	- La comunicación de los agentes se realiza de la siguiente manera:	                |
+|                                                                                       |
+|	* El agente Entrenador1 se comunica con el agente PikachuAgent envian-              |
+|	  dole un mensaje para decirle que le ha elegido.                                   |
+|	* PikachuAgent recibe el mensaje y le devuelve un mensaje diciendole                |
+|	  que esta muy activo.                                                              |
+|	* Entrenador1 recibe el mensaje y le devuelve que use OndaTrueno.                   |
+|	* PikachuAgent recibe el mensaje e intenta establecer comunicación                  |
+|	  con JigglypuffAgent, para ello envia un mensaje mandandole su ataque.             |
+|	* JigglypuffAgent recibe el ataque y se enoja, le envia un mensaje                  |
+|	  mandandole su ataque Canto(este ataque hace que se duerma un pokemon).            |
+|	* PikachuAgent recibe el ataque y se queda dormido.                                 |
+|           --------------  Terminan las comunicaciones ----------------                |
+|_______________________________________________________________________________________|
+|---------------------------------------------------------------------------------------|
+|											NOTA                                        |
+|---------------------------------------------------------------------------------------|
+|	- Al terminar las comunicaciones los 3 agentes reciben comportamientos              |
+|	  que les harán devolver mensajes por pantalla cada cierto tiempo:                  |
+|                                                                                       |
+|	* PikachuAgent usa un TickerBehaviour para devolver un mensaje de que               |
+|	  esta dormido cada cierto tiempo hasta que un WakerBehaviour lo des-               |
+|	  pierta y muestra que esta demasiado debil y se elimina el agente,                 |
+|	  sacando por pantalla que ha sido derrotado.                                       |
+|                                                                                       |
+|	* JigglypuffAgent usa un DormidoStepBehaviour para devolver mensajes                |
+|	  de diferentes acciones cada cierto tiempo, controlado por la cantidad             |
+|	  de Steps y un tiempo de espera entre cada mensaje, al pasar el limite             |
+|	  de Steps se elimina el agente y sacando por pantalla que ha sido                  |
+|	  vencedor.                                                                         |
+|                                                                                       |
+|	* Entrenador1 usa un CyclicBehaviour para devolver mensajes de animos               |
+|	  cada cierto tiempo esto se consigue usando un contador controlado por             |
+|	  un if y un bloqueo de comportamiento controlado por tiempo, al cumplir            |
+|	  una condición del if elimina el agente y saca por pantalla que ha sido            |
+|	  vencido y derrotado.                                                              |
+|           ------------------  Termina el Escenario    --------------------            |
+|---------------------------------------------------------------------------------------|
+|_______________________________________________________________________________________|
